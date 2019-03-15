@@ -626,14 +626,14 @@ describe('repeat', () => {
   // Skip test that only fails on travis
   it('should use ".every" as a valid interval', function(done) {
     const _this = this;
-    const interval = ONE_SECOND * 2;
+    const interval = ONE_MINUTE * 2;
     const date = new Date('2017-02-07 9:24:00');
 
     // Quantize time
-    const time = Math.floor(date.getTime() / interval) * interval;
+    const time = Math.floor(date.getTime() / 60000) * 60000;
     this.clock.tick(time);
 
-    const nextTick = ONE_SECOND * 2 + 500;
+    const nextTick = ONE_MINUTE * 2 + 500;
 
     queue
       .add('repeat m', { type: 'm' }, { repeat: { every: interval } })
@@ -665,7 +665,7 @@ describe('repeat', () => {
       }
       prevType = job.data.type;
       counter++;
-      if (counter == 20) {
+      if (counter == 1200) {
         done();
       }
     });
